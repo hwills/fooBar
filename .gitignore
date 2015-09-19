@@ -16,7 +16,6 @@ update.bat
 src/test/resources/properties/application.properties
 src/test/resources/properties/ingrian.properties
 src/main/resources/vendor/*
-src/main/resources/public/*
 coverage/*
 *.log
 
