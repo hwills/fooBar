@@ -30,3 +30,56 @@ If you have a settings.xml in your local maven repository
  (C:\Users\<username>\.m2\settings.xml)
  you will need to rename this file when updating project if your
  settings.xml points to a different maven repository
+ 
+***DATABASE STRUCTURE***
+TABLE: users
++----------+-----------------------+------+-----+---------+----------------+
+| Field    | Type                  | Null | Key | Default | Extra          |
++----------+-----------------------+------+-----+---------+----------------+
+| id       | mediumint(8) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(50)           | NO   |     | NULL    |                |
+| password | varchar(20)           | NO   |     | NULL    |                |
+| cc_num   | char(16)              | NO   |     | NULL    |                |
+| cc_mo    | tinyint(3) unsigned   | NO   |     | NULL    |                |
+| cc_yr    | tinyint(3) unsigned   | NO   |     | NULL    |                |
+| cc_cvv   | tinyint(3) unsigned   | NO   |     | NULL    |                |
++----------+-----------------------+------+-----+---------+----------------+
+
+TABLE: orders
++-----------------+-----------------------+------+-----+-------------------+----------------+
+| Field           | Type                  | Null | Key | Default           | Extra          |
++-----------------+-----------------------+------+-----+-------------------+----------------+
+| id              | mediumint(8) unsigned | NO   | PRI | NULL              | auto_increment |
+| user_id         | mediumint(8) unsigned | NO   | MUL | NULL              |                |
+| restaurant_name | varchar(100)          | NO   |     | NULL              |                |
+| order_address   | varchar(200)          | NO   |     | NULL              |                |
+| deliver_address | varchar(200)          | NO   |     | NULL              |                |
+| order_name      | text                  | NO   |     | NULL              |                |
+| price           | decimal(8,2)          | NO   |     | NULL              |                |
+| time            | timestamp             | NO   |     | CURRENT_TIMESTAMP |                |
++-----------------+-----------------------+------+-----+-------------------+----------------+
+
+TABLE: drivers
++-----------+-----------------------+------+-----+---------+----------------+
+| Field     | Type                  | Null | Key | Default | Extra          |
++-----------+-----------------------+------+-----+---------+----------------+
+| id        | mediumint(8) unsigned | NO   | PRI | NULL    | auto_increment |
+| username  | varchar(50)           | NO   |     | NULL    |                |
+| password  | varchar(20)           | NO   |     | NULL    |                |
+| cc_num    | char(16)              | NO   |     | NULL    |                |
+| cc_mo     | tinyint(3) unsigned   | NO   |     | NULL    |                |
+| cc_yr     | tinyint(3) unsigned   | NO   |     | NULL    |                |
+| cc_cvv    | tinyint(3) unsigned   | NO   |     | NULL    |                |
+| available | enum('yes','no')      | YES  |     | no      |                |
+| location  | tinyint(3) unsigned   | YES  |     | NULL    |                |
++-----------+-----------------------+------+-----+---------+----------------+
+
+HOW TO GET ONTO THE DATABASE:
+shell> mysql -h host -u myname -p'mypass' mydb
+
+Host: sql5.freesqldatabase.com
+Database name: sql590678
+Database user: sql590678
+Database password: gH6!dJ2!
+Port number: 3306
+**note: must do quotes around password due to the ! operator
