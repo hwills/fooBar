@@ -11,6 +11,8 @@ var restaurants = require('./routes/restaurants');
 
 var app = express();
 
+var socketio = require("socket.io");
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -22,6 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', routes);
 app.use('/restaurants', restaurants);
@@ -48,6 +51,7 @@ if (app.get('env') === 'development') {
   });
 }
 
+
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
@@ -59,4 +63,6 @@ app.use(function(err, req, res, next) {
 });
 
 
+
 module.exports = app;
+

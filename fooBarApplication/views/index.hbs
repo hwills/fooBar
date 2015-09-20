@@ -22,6 +22,8 @@
 
 	<link rel='stylesheet' type = 'text/css' href = '/stylesheets/foobar.css'>
 
+	<script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+
 </head>
 
 <body>
@@ -151,9 +153,12 @@
 <script>
 
 
+
 $(document).ready(function(){
 
-	//hide content of the modal at beginning
+	//connect client socket to server
+	//
+	var socket_client;
 
 
 	$("#order_submit").click(function(){
@@ -162,6 +167,15 @@ $(document).ready(function(){
 
 		$("#loading_fa").show();
 		$("#modal_title").text("Assigning you a driver/fulfiller");
+
+		//should be passed by logic to find driver and use their phone number
+		var driver_phone = "7177257302";
+		var rest_address = "4 Delmar Loop";
+
+		/* ask server to text the client*/
+		socket_client = io.connect();
+		console.log("emitting from client!");
+		socket_client.emit("text_driver", {phone: driver_phone, address: rest_address});
 
 	});
 
@@ -177,7 +191,20 @@ $(document).ready(function(){
 		$("#payment_form").show();
 		$("#modal_title").text("Please enter your card information");
 
+		
+
+
 	});
+
+	/*socket_client.on("driver_reply", function(data){
+
+		/*check for response and act appropriately
+
+
+
+
+
+	});*/
 
 
 

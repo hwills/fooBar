@@ -7,13 +7,15 @@
 var app = require('../app');
 var debug = require('debug')('fooBarApplication:server');
 var http = require('http');
+var socketio = require("socket.io");
+var twilio_client = require("../twilio_com");
 
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+//app.set('port', port);
 
 /**
  * Create HTTP server.
@@ -24,6 +26,34 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
+
+var io = socketio(server);
+
+//server.listen(8000);
+
+io.on("connection", function(socket){
+
+    socket.on("text_driver", function(data){
+
+        console.log("arriving in server!");
+        twilio_client.messages.create({ 
+        to: data['phone'], 
+        from: "+17174926756", 
+        body: "Order REQUEST:\n"
+                + "Restaurant Location: " + data['address']
+                + "Please log in to your FooBar and accept or decline the request.\n"
+                + "Thank you for being a dependable FOOBAR customer!!",    
+      }, function(err, message) { 
+        console.log(message.sid); 
+        });
+
+
+  console.log("done sending text!");
+
+  });
+
+
+});
 
 server.listen(port);
 server.on('error', onError);
