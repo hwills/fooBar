@@ -13,6 +13,8 @@
     "express": "~4.13.1",
     "express.io": "^1.1.13",
     "hbs": "~3.1.0",
+    "jquery": "~1.11.3",
+    "jsdom": "^1.5.0",
     "morgan": "~1.6.1",
     "mysql": "^2.5.4",
     "serve-favicon": "~2.3.0",

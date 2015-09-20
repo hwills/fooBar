@@ -1,8 +1,39 @@
 <html>
 <head>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
 </head>
 <body>
-<h1>Restaurants</h1>
+<h1>Restaurants near {{city}}</h1>
+<ul id="restaurantList">
+</ul>
 </body>
+<script>
 
+$(document).ready(function(){
+    $.ajax({
+        url: "http://api.tripadvisor.com/api/partner/2.0/search/" + "{{city}}" + "?key=8351D44691C44D74B1F52E972258860F&category=geos",
+            dataType: 'json',
+            success: function(results){
+                var locationId = results['geos'][0]['location_id'];
+                populateRestaurants(""+locationId);
+            }
+    });
+    
+    function populateRestaurants(locationId) {
+        $.ajax({
+            url: "http://api.tripadvisor.com/api/partner/2.0/location/" + locationId + "/restaurants?key=B76E7B74B4E64514846A6A418C7A9C16",
+            dataType: 'json',
+            success: function(results) {
+                $.each(results['data'], function(index,value) {
+                    var restaurantName = value['name'];
+                    var restaurantAddress = value['address_obj']['address_string'];
+                    var restaurantUrl = value['web_url'];
+                    $("#restaurantList").append("<li><a href="+restaurantUrl+">"+restaurantName+"</a> <form action='/order' method='POST'> <input type=submit value='Place Order'><input type=hidden value='"+restaurantAddress+"'></form> </li>");
+                });
+            }
+        });
+    }
+});
+
+</script>
 </html>
