@@ -28,7 +28,7 @@ $(document).ready(function(){
                     var restaurantName = value['name'];
                     var restaurantAddress = value['address_obj']['address_string'];
                     var restaurantUrl = value['web_url'];
-                    $("#restaurantList").append("<li><a href="+restaurantUrl+">"+restaurantName+"</a> <form action='/order' method='POST'> <input type=submit>Order Now <input type=hidden value='"+restaurantAddress+"'></form> </li>");
+                    $("#restaurantList").append("<li><a href="+restaurantUrl+">"+restaurantName+"</a> <form action='/order' method='POST'> <input type=submit value='Place Order'><input type=hidden value='"+restaurantAddress+"'></form> </li>");
                 });
             }
         });

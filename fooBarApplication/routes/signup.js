@@ -8,28 +8,29 @@ var connection = mysql.createConnection({
 });
 var router = express.Router();
 
-var email = "hwills@wustl.edu"
-
 connection.connect();
 
-connection.query("select * from buyers where email='"+email+"'", function(err, rows, fields) {
-  if (!err){
+var name = "James Farquar";
+var email = "jfq@gmail.com";
+var phone = "9179808822";
+var address = "1 World Way, Boston, MA";
+var password = "go4gold";
+
+connection.query("insert into buyers (name, email, phone, address, password) values ('"+name+"', '"+email+"', '"+phone+"', '"+address+"', '"+password+"')", function(err, rows, fields) {
+  if (!err)
     console.log('The solution is: ', rows);
-    var address = rows[0]['address'];
-    var homeCity = (address.split(",")[1]).substr(1);
-    router.get('/', function(req, res, next) {
-        res.render('restaurants', {city: homeCity});
-    });
-  }
-  else{
+  else
     console.log('Error while performing Query.');
     router.get('/', function(req, res, next) {
         res.render('login', {});
     });
-  }
 });
 
+var homeCity = (address.split(",")[1]).substr(1);
 
 /* GET home page. */
+router.get('/restaurants', function(req, res, next) {
+  res.render('restaurants', {city: homeCity});
+});
 
 module.exports = router;
