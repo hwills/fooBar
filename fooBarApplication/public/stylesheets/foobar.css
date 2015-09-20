@@ -1,0 +1,63 @@
+body{
+	
+	margin: 0;
+	
+}
+
+#order_form, #login_form {
+
+	margin-top: 20px;
+
+}
+
+#login_email, #login_password {
+	margin-bottom: 10px;
+}
+
+.modal-body {
+	
+    text-align: center;
+}
+
+#banner {
+	
+	background-color: #009933;
+	color: white;
+	z-index: 5;
+	
+	
+	
+}
+
+.banner-wide{
+	padding-top: 30px;
+	padding-bottom: 30px;
+	text-align: center;
+	
+}
+
+.banner-narrow{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: left;
+	position: fixed;
+	width: 100%
+}
+
+.logo-narrow{
+	height: 60px;
+}
+
+#logo-container{
+	
+	vertical-align: middle;
+	box-sizing: content-box;
+	
+	
+}
+
+.logo-narrow > img{
+	display: block;
+  	width: 80px;
+	padding-left: 10px;
+}
